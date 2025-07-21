@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>異體字字典：字圖查詢小工具</title>
+</head>
+<body>
+  <center>
+  <h1>異體字字典：字圖查詢小工具</h1>
+  <h2>請輸入查詢資訊</h2>
+  <label for="bookCode">書籍代號（三位數）：</label>
+  <input type="text" id="bookCode" maxlength="3" placeholder="例如：001" /><br><br>
+
+  <label for="glyphId">字圖ID（七位數）：</label>
+  <input type="text" id="glyphId" maxlength="7" placeholder="例如：0001234" /><br><br>
+
+  <button onclick="goToImage()">確認</button>
+  </center>
+  <script>
+    function goToImage() {
+      const bookCode = document.getElementById("bookCode").value.trim();
+      const glyphId = document.getElementById("glyphId").value.trim();
+
+      // 驗證格式
+      const bookCodeValid = /^\d{3}$/.test(bookCode);
+      const glyphIdValid = /^\d{7}$/.test(glyphId);
+
+      if (!bookCodeValid || !glyphIdValid) {
+        alert("請輸入正確格式的書籍代號（三位數）與字圖ID（七位數）");
+        return;
+      }
+
+      const url = `https://dict.variants.moe.edu.tw/book_piece/${bookCode}/${glyphId}.png`;
+      window.open(url, "_blank"); // 在新分頁開啟
+    }
+  </script>
+</body>
+</html>
